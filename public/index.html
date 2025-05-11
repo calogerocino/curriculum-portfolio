@@ -147,7 +147,7 @@
         }
 
         .timeline-header { /* L'header rimane per il titolo e la data */
-            @apply flex items-center py-2; /* Rimosso cursor-pointer se solo il nuovo trigger espande */
+            @apply flex items-center py-2;
         }
         .timeline-header-clickable-area { /* Area del titolo */
              @apply flex items-center gap-2;
@@ -182,14 +182,19 @@
 
         /* Stili per il nuovo trigger di espansione */
         .timeline-expand-trigger {
-            @apply mt-4 pt-3 border-t border-gray-200 text-right cursor-pointer flex justify-end items-center;
+            /* Flexbox per allineare testo e freccia. items-center per allineamento verticale. justify-end per posizionare a destra. */
+            @apply mt-4 pt-3 border-t border-gray-200 cursor-pointer flex justify-end items-center;
+            /* Il colore qui è generico, le classi Tailwind su span e svg lo sovrascriveranno specificamente */
+             color:#3b82f6; 
         }
         .timeline-expand-trigger span {
+            /* Stili per il testo "ulteriori dettagli" */
             @apply text-sky-500 hover:text-sky-600 underline text-sm font-medium;
-             vertical-align: middle;
+            /* vertical-align: middle; rimosso perché items-center sul genitore è più appropriato */
         }
         .new-timeline-arrow {
-            @apply inline-block w-5 h-5 ml-1 text-sky-500 transition-transform duration-300;
+            /* Stili per la freccia SVG. w-4 h-4 per dimensione, ml-1 per spaziatura. */
+            @apply inline-block w-4 h-4 ml-1 text-sky-500 transition-transform duration-300;
         }
         .new-timeline-arrow.expanded {
             transform: rotate(180deg);
@@ -239,8 +244,8 @@
                 <div class="hidden md:flex space-x-4">
                     <a href="#home" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navHome">Home</a>
                     <a href="#progetti" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navProjects">Progetti</a>
-                    <a href="#competenze" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navSkills">Competenze</a>
                     <a href="#curriculum" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navCV">Esperienze</a>
+                    <a href="#competenze" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navSkills">Competenze</a>
                     <a href="#chi-sono" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navAbout">Chi Sono</a>
                     <a href="#contatti" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navContact">Contatti</a>
                 </div>
@@ -294,19 +299,19 @@
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card transition-all duration-300">
                     <img src="https://placehold.co/600x400/e74c3c/ffffff?text=Progetto+Angular&font=inter" alt="Immagine Progetto Angular" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-key="projectAngularTitle">Nome Progetto Angular</h3>
-                        <p class="text-gray-600 text-sm mb-4" data-key="projectAngularDesc">Descrizione di un'applicazione web dinamica sviluppata con Angular, evidenziando le tecnologie usate.</p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-key="projectAngularTitle">PixelSmart</h3>
+                        <p class="text-gray-600 text-sm mb-4" data-key="projectAngularDesc">Piattaforma Angular in sviluppo con Firebase API e NGRX. Offre traduzione istantanea, caricamento rapido e grande adattabilità. Alte potenzialità per svariati utilizzi.</p>
                         <span class="inline-block bg-red-100 text-red-600 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">Angular</span>
-                        <a href="#" class="block text-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300" data-key="projectDetailsButton2">Vedi Dettagli</a>
+                        <a href="https://github.com/calogerocino/PixelSmart" target="_blank" class="block text-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300" data-key="projectDetailsButton2">Vedi Repository</a>
                     </div>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card transition-all duration-300">
                     <img src="https://placehold.co/600x400/8e44ad/ffffff?text=Progetto+HTML/PHP&font=inter" alt="Immagine Progetto HTML/PHP" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-key="projectPHPTitle">Nome Progetto HTML/PHP</h3>
-                        <p class="text-gray-600 text-sm mb-4" data-key="projectPHPDesc">Un sito web o un'applicazione server-side realizzata con HTML, CSS, JavaScript e PHP.</p>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-key="projectPHPTitle">PortaleScifo</h3>
+                        <p class="text-gray-600 text-sm mb-4" data-key="projectPHPDesc">Soluzione gestionale integrata: magazzino, contabilità, e-commerce (PrestaShop/altri) sincronizzati. Gestisce fino a 3 punti vendita per un controllo centralizzato e ottimizzato del tuo business. Realizzato in HTML, PHP, JavaScript e MySQL.</p>
                         <span class="inline-block bg-purple-100 text-purple-600 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">HTML/PHP</span>
-                        <a href="#" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300" data-key="projectDetailsButton3">Vedi Dettagli</a>
+                        <a href="https://github.com/calogerocino/portalescifo" target="_blank" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300" data-key="projectDetailsButton3">Vedi Repository</a>
                     </div>
                 </div>
             </div>
@@ -335,13 +340,13 @@
                                 <span data-key="cvSkillDataAnalysis">Analisi Dati</span>
                             </div>
                         </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
                         <div class="expandable-details">
                             <p class="text-sm text-gray-600" data-key="cvExp1Detail1">Gestione avanzata del rapporto con i clienti e fidelizzazione.</p>
                             <p class="text-sm text-gray-600 mt-1" data-key="cvExp1Detail2">Formazione di nuovi colleghi sulle procedure di vendita e sui prodotti.</p>
-                        </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
-                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </div>
                 </div>
@@ -366,13 +371,13 @@
                                 <span data-key="cvSkillPrestashop">Prestashop</span>
                             </div>
                         </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
                         <div class="expandable-details">
                             <p class="text-sm text-gray-600" data-key="cvExp2Detail1">Ottimizzazione SEO on-page e off-page che ha portato a un aumento del traffico organico del 40%.</p>
                             <p class="text-sm text-gray-600 mt-1" data-key="cvExp2Detail2">Sviluppo di moduli custom per Prestashop per migliorare l'esperienza utente.</p>
-                        </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
-                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </div>
                 </div>
@@ -393,12 +398,12 @@
                                 <span data-key="cvSkillCommercial">Commerciale</span>
                             </div>
                         </div>
-                        <div class="expandable-details">
-                            <p class="text-sm text-gray-600" data-key="cvExp3Detail1">Acquisizione e gestione di un portafoglio clienti business.</p>
-                        </div>
                         <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="expandable-details">
+                            <p class="text-sm text-gray-600" data-key="cvExp3Detail1">Acquisizione e gestione di un portafoglio clienti business.</p>
                         </div>
                     </div>
                 </div>
@@ -420,12 +425,12 @@
                                 <span data-key="cvSkillLaw">Diritto</span>
                             </div>
                         </div>
-                        <div class="expandable-details">
-                             <p class="text-sm text-gray-600" data-key="cvEdu1Detail1">Progetto scolastico: Sviluppo di un piccolo gestionale in Visual Basic per la biblioteca scolastica.</p>
-                        </div>
                         <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="expandable-details">
+                             <p class="text-sm text-gray-600" data-key="cvEdu1Detail1">Progetto scolastico: Sviluppo di un piccolo gestionale in Visual Basic per la biblioteca scolastica.</p>
                         </div>
                     </div>
                 </div>
@@ -565,13 +570,13 @@
                 projectsTitle: "Progetti in Evidenza",
                 projectVBTitle: "Nome Progetto VB",
                 projectVBDesc: "Breve descrizione del progetto realizzato in Visual Basic, le sue funzionalità principali e lo scopo.",
-                projectDetailsButton: "Vedi Dettagli",
-                projectAngularTitle: "Nome Progetto Angular",
-                projectAngularDesc: "Descrizione di un'applicazione web dinamica sviluppata con Angular, evidenziando le tecnologie usate.",
-                projectDetailsButton2: "Vedi Dettagli",
-                projectPHPTitle: "Nome Progetto HTML/PHP",
-                projectPHPDesc: "Un sito web o un'applicazione server-side realizzata con HTML, CSS, JavaScript e PHP.",
-                projectDetailsButton3: "Vedi Dettagli",
+                projectDetailsButton: "Vedi repository",
+                projectAngularTitle: "PixelSmart",
+                projectAngularDesc: "Piattaforma Angular in sviluppo con Firebase API e NGRX. Offre traduzione istantanea, caricamento rapido e grande adattabilità. Alte potenzialità per svariati utilizzi.",
+                projectDetailsButton2: "Vedi repository",
+                projectPHPTitle: "PortaleScifo",
+                projectPHPDesc: "Soluzione gestionale integrata: magazzino, contabilità, e-commerce (PrestaShop/altri) sincronizzati. Gestisce fino a 3 punti vendita per un controllo centralizzato e ottimizzato del tuo business. Realizzato in HTML, PHP, JavaScript e MySQL.",
+                projectDetailsButton3: "Vedi repository",
                 cvTitle: "Esperienze e Formazione",
                 cvExp1Title: "Addetto alle Vendite",
                 cvExp1Date: "Marzo 2022 - Oggi",
@@ -604,7 +609,6 @@
                 cvSkillAccounting: "Economia",
                 cvSkillIT: "Informatica",
                 cvSkillLaw: "Diritto",
-                cvTechSkillsTitle: "Competenze Tecniche", // Assicurati che questa chiave sia usata o rimuovila se non lo è
                 cvSoftSkillsTitle: "Soft Skills",
                 cvSoftSkill1: "Spirito di iniziativa e creatività",
                 cvSoftSkill2: "Cura dei dettagli",
@@ -626,7 +630,7 @@
                 footerName: "Calogero",
                 footerRights: "Tutti i diritti riservati.",
                 footerMadeWith: "Realizzato con ❤️ e Tailwind CSS.",
-                viewMoreDetails: "Ulteriori dettagli" // Aggiunta traduzione
+                viewMoreDetails: "Ulteriori dettagli" // Traduzione aggiornata se necessario
             },
             en: {
                 pageTitle: "My Portfolio - Calogero",
@@ -658,13 +662,13 @@
                 projectsTitle: "Featured Projects",
                 projectVBTitle: "VB Project Name",
                 projectVBDesc: "Brief description of the project made in Visual Basic, its main features and purpose.",
-                projectDetailsButton: "View Details",
-                projectAngularTitle: "Angular Project Name",
-                projectAngularDesc: "Description of a dynamic web application developed with Angular, highlighting the technologies used.",
-                projectDetailsButton2: "View Details",
-                projectPHPTitle: "HTML/PHP Project Name",
-                projectPHPDesc: "A website or server-side application built with HTML, CSS, JavaScript, and PHP.",
-                projectDetailsButton3: "View Details",
+                projectDetailsButton: "View repository",
+                projectAngularTitle: "PixelSmart",
+                projectAngularDesc: "Angular platform in development with Firebase API and NGRX. Offers instant translation, fast loading, and great adaptability. High potential for various uses.",
+                projectDetailsButton2: "View repository",
+                projectPHPTitle: "PortaleScifo",
+                projectPHPDesc: "Integrated management solution: synchronized inventory, accounting, e-commerce (PrestaShop/others). Manages up to 3 stores for centralized and optimized business control.",
+                projectDetailsButton3: "View repository",
                 cvTitle: "Experience and Education",
                 cvExp1Title: "Sales Assistant",
                 cvExp1Date: "March 2022 - Present",
@@ -697,7 +701,6 @@
                 cvSkillAccounting: "Accounting",
                 cvSkillIT: "IT",
                 cvSkillLaw: "Law",
-                cvTechSkillsTitle: "Technical Skills", // Ensure this key is used or remove if not
                 cvSoftSkillsTitle: "Soft Skills",
                 cvSoftSkill1: "Initiative and creativity",
                 cvSoftSkill2: "Attention to detail",
@@ -719,7 +722,7 @@
                 footerName: "Calogero",
                 footerRights: "All rights reserved.",
                 footerMadeWith: "Made with ❤️ and Tailwind CSS.",
-                viewMoreDetails: "More details" // Added translation
+                viewMoreDetails: "More details" // Updated translation if needed
             }
         };
 
