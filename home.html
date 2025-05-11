@@ -76,7 +76,7 @@
             content: '';
             position: absolute;
             width: 6px;
-            background-color: #cbd5e1;
+            background-color: #cbd5e1; /* Grigio più chiaro per la linea */
             top: 0;
             bottom: 0;
             left: 50%;
@@ -95,7 +95,7 @@
             height: 25px;
             right: -17px;
             background-color: white;
-            border: 4px solid #3b82f6;
+            border: 4px solid #3b82f6; /* Blu per i cerchi */
             top: 15px;
             border-radius: 50%;
             z-index: 1;
@@ -146,22 +146,16 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        .timeline-header {
-            @apply flex items-center cursor-pointer py-2;
+        .timeline-header { /* L'header rimane per il titolo e la data */
+            @apply flex items-center py-2;
         }
-        .timeline-header-clickable-area {
+        .timeline-header-clickable-area { /* Area del titolo */
              @apply flex items-center gap-2;
         }
         .timeline-header h3 {
             @apply text-lg font-semibold text-blue-600;
         }
-        .timeline-arrow {
-            @apply w-5 h-5 text-blue-600 transition-transform duration-300;
-        }
-        .timeline-arrow.expanded {
-            transform: rotate(180deg);
-        }
-
+        
         .static-details {
             @apply mt-1;
         }
@@ -173,7 +167,7 @@
             @apply mt-2;
         }
         .expandable-details.expanded {
-            @apply pt-2;
+            @apply pt-2; /* Aggiunge padding quando espanso */
         }
 
         .timeline-content .date {
@@ -186,6 +180,27 @@
             @apply inline-block bg-gray-200 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full mb-1;
         }
 
+        /* Stili per il nuovo trigger di espansione */
+        .timeline-expand-trigger {
+            /* Flexbox per allineare testo e freccia. items-center per allineamento verticale. justify-end per posizionare a destra. */
+            @apply mt-4 pt-3 border-t border-gray-200 cursor-pointer flex justify-end items-center;
+            /* Il colore qui è generico, le classi Tailwind su span e svg lo sovrascriveranno specificamente */
+             color:#3b82f6; 
+        }
+        .timeline-expand-trigger span {
+            /* Stili per il testo "ulteriori dettagli" */
+            @apply text-sky-500 hover:text-sky-600 underline text-sm font-medium;
+            /* vertical-align: middle; rimosso perché items-center sul genitore è più appropriato */
+        }
+        .new-timeline-arrow {
+            /* Stili per la freccia SVG. w-4 h-4 per dimensione, ml-1 per spaziatura. */
+            @apply inline-block w-4 h-4 ml-1 text-sky-500 transition-transform duration-300;
+        }
+        .new-timeline-arrow.expanded {
+            transform: rotate(180deg);
+        }
+
+
         @media screen and (max-width: 768px) {
             .timeline::after {
                 left: 31px;
@@ -195,20 +210,20 @@
                 padding-left: 70px;
                 padding-right: 25px;
             }
-            .timeline-item::before {
+            .timeline-item::before { /* Frecce per i box a sinistra e destra su mobile */
                 left: 60px;
                 border: medium solid white;
                 border-width: 10px 10px 10px 0;
                 border-color: transparent white transparent transparent;
             }
-            .timeline-left::after, .timeline-right::after {
+            .timeline-left::after, .timeline-right::after { /* Cerchi su mobile */
                 left: 15px;
             }
-            .timeline-right {
+            .timeline-right { /* Allinea tutti gli item a sinistra su mobile */
                 left: 0%;
             }
         }
-          .info-card {
+        .info-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .info-card:hover {
@@ -229,8 +244,8 @@
                 <div class="hidden md:flex space-x-4">
                     <a href="#home" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navHome">Home</a>
                     <a href="#progetti" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navProjects">Progetti</a>
-                    <a href="#competenze" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navSkills">Competenze</a>
                     <a href="#curriculum" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navCV">Esperienze</a>
+                    <a href="#competenze" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navSkills">Competenze</a>
                     <a href="#chi-sono" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navAbout">Chi Sono</a>
                     <a href="#contatti" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium" data-key="navContact">Contatti</a>
                 </div>
@@ -310,11 +325,10 @@
             <div class="timeline mb-16">
                 <div class="timeline-item timeline-left">
                     <div class="timeline-content">
-                        <div class="timeline-header" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-header">
                             <div class="timeline-header-clickable-area">
                                 <h3 data-key="cvExp1Title">Addetto alle Vendite</h3>
-                                <svg class="timeline-arrow w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
+                                </div>
                         </div>
                         <div class="static-details">
                             <div class="date" data-key="cvExp1Date">Marzo 2022 - Oggi</div>
@@ -326,16 +340,22 @@
                                 <span data-key="cvSkillDataAnalysis">Analisi Dati</span>
                             </div>
                         </div>
-                        <div class="expandable-details">ciao ciao ciao prova prova
-                            </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="expandable-details">
+                            <p class="text-sm text-gray-600" data-key="cvExp1Detail1">Gestione avanzata del rapporto con i clienti e fidelizzazione.</p>
+                            <p class="text-sm text-gray-600 mt-1" data-key="cvExp1Detail2">Formazione di nuovi colleghi sulle procedure di vendita e sui prodotti.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="timeline-item timeline-right">
                     <div class="timeline-content">
-                        <div class="timeline-header" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-header">
                             <div class="timeline-header-clickable-area">
                                 <h3 data-key="cvExp2Title">Web Master & SEO Management</h3>
-                                <svg class="timeline-arrow w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                         <div class="static-details">
@@ -351,16 +371,22 @@
                                 <span data-key="cvSkillPrestashop">Prestashop</span>
                             </div>
                         </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
                         <div class="expandable-details">
-                             </div>
+                            <p class="text-sm text-gray-600" data-key="cvExp2Detail1">Ottimizzazione SEO on-page e off-page che ha portato a un aumento del traffico organico del 40%.</p>
+                            <p class="text-sm text-gray-600 mt-1" data-key="cvExp2Detail2">Sviluppo di moduli custom per Prestashop per migliorare l'esperienza utente.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="timeline-item timeline-left">
                     <div class="timeline-content">
-                        <div class="timeline-header" role="button" tabindex="0" aria-expanded="false">
-                            <div class="timeline-header-clickable-area">
+                        <div class="timeline-header">
+                             <div class="timeline-header-clickable-area">
                                  <h3 data-key="cvExp3Title">Consulente Commerciale</h3>
-                                <svg class="timeline-arrow w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                         <div class="static-details">
@@ -372,16 +398,21 @@
                                 <span data-key="cvSkillCommercial">Commerciale</span>
                             </div>
                         </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
                         <div class="expandable-details">
-                            </div>
+                            <p class="text-sm text-gray-600" data-key="cvExp3Detail1">Acquisizione e gestione di un portafoglio clienti business.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="timeline-item timeline-right">
                     <div class="timeline-content">
-                        <div class="timeline-header" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-header">
                             <div class="timeline-header-clickable-area">
                                 <h3 data-key="cvEdu1Title">Diploma Ragioniere Informatico</h3>
-                                <svg class="timeline-arrow w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </div>
                         </div>
                         <div class="static-details">
@@ -394,59 +425,54 @@
                                 <span data-key="cvSkillLaw">Diritto</span>
                             </div>
                         </div>
+                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                            <span data-key="viewMoreDetails">Ulteriori dettagli</span>
+                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
                         <div class="expandable-details">
-                            </div>
+                             <p class="text-sm text-gray-600" data-key="cvEdu1Detail1">Progetto scolastico: Sviluppo di un piccolo gestionale in Visual Basic per la biblioteca scolastica.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            
-
-    <section id="competenze" class="py-16 vintage-animated-bg">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-key="skillsTitle">Le Mie Competenze</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 text-center">
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">VB</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillVB">Visual Basic</h3>
+            </div> <section id="competenze" class="py-16 vintage-animated-bg">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-key="skillsTitle">Le Mie Competenze</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 text-center">
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">VB</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillVB">Visual Basic</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">Ng</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillAngular">Angular</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">JS</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillJS">JavaScript</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">HTML</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillHTML">HTML5</h3>
+                        </div>
+                         <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">PHP</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillPHP">PHP</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">SQL</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillMySQL">MySQL</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">SEO</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillSEO">SEO</h3>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">Ps</div>
+                            <h3 class="text-lg font-semibold text-gray-700" data-key="skillPhotoshop">Photoshop</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">Ng</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillAngular">Angular</h3>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl font-bold">JS</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillJS">JavaScript</h3>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">HTML</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillHTML">HTML5</h3>
-                </div>
-                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">PHP</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillPHP">PHP</h3>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">MySQL</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillMySQL">MySQL</h3>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">Visual Basic</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillvisualbasic">Visual Basic</h3>
-                </div>
-                
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">SEO</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillSEO">SEO</h3>
-                </div>
-                
-                <div class="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-sm font-bold">Photoshop</div>
-                    <h3 class="text-lg font-semibold text-gray-700" data-key="skillPhotoshop">Photoshop</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 py-16">
                 <div>
@@ -468,11 +494,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-    <section id="chi-sono" class="py-16 bg-gray-50"> <div class="container mx-auto px-6 md:w-2/3 lg:w-1/2 text-center">
+        </div> </section> <section id="chi-sono" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 md:w-2/3 lg:w-1/2 text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-6" data-key="aboutTitle">Chi Sono</h2>
             <img src="img/main.jpg" alt="La mia foto" class="w-32 h-32 rounded-full mx-auto mb-6 shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/128x128/e0e0e0/757575?text=Foto';">
             <p class="text-gray-600 mb-4" data-key="aboutDesc1">
@@ -484,22 +507,24 @@
         </div>
     </section>
 
-    <section id="contatti" class="py-16 bg-white"> <div class="container mx-auto px-6 text-center">
+    <section id="contatti" class="py-16 bg-white">
+        <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-6" data-key="contactTitle">Mettiamoci in Contatto</h2>
             <p class="text-gray-600 mb-8" data-key="contactSubtitle">
                 Sei interessato a collaborare o hai una domanda? Non esitare a scrivermi.
             </p>
             <a href="mailto:kalogero.cino97@gmail.com" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300" data-key="contactButton">Scrivimi una Email</a>
             <div class="mt-8 flex justify-center space-x-6">
-                <a href="https://github.com/calogerocino" class="text-gray-500 hover:text-gray-900" aria-label="GitHub">
+                <a href="https://github.com/calogerocino" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-900" aria-label="GitHub">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
                     <span class="sr-only">GitHub</span>
                 </a>
-                <a href="https://www.linkedin.com/in/calogero-cino-4a7333172/" class="text-gray-500 hover:text-blue-700" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/calogero-cino-4a7333172/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-700" aria-label="LinkedIn">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     <span class="sr-only">LinkedIn</span>
                 </a>
-                <a href="#" class="text-gray-500 hover:text-pink-600" aria-label="Instagram"> <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.358-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" clip-rule="evenodd"/></svg>
+                <a href="#" class="text-gray-500 hover:text-pink-600" aria-label="Instagram">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.358-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" clip-rule="evenodd"/></svg>
                     <span class="sr-only">Instagram</span>
                 </a>
             </div>
@@ -540,7 +565,6 @@
                 skillHTML: "HTML5",
                 skillPHP: "PHP",
                 skillMySQL: "MySQL",
-                skillvisualbasic: "Visual Basic",
                 skillSEO: "SEO",
                 skillPhotoshop: "Photoshop",
                 projectsTitle: "Progetti in Evidenza",
@@ -558,6 +582,8 @@
                 cvExp1Date: "Marzo 2022 - Oggi",
                 cvExp1Company: "Bruno spa, Catania",
                 cvExp1Desc: "Conoscenza prodotti, rapporti fornitori, pianificazione team, analisi dati fatturato.",
+                cvExp1Detail1: "Gestione avanzata del rapporto con i clienti e fidelizzazione.",
+                cvExp1Detail2: "Formazione di nuovi colleghi sulle procedure di vendita e sui prodotti.",
                 cvSkillSales: "Vendite",
                 cvSkillTeam: "Team Management",
                 cvSkillDataAnalysis: "Analisi Dati",
@@ -565,21 +591,24 @@
                 cvExp2Date: "Febbraio 2018 - Marzo 2022",
                 cvExp2Company: "VivaiScifoStore, San Cataldo (CL)",
                 cvExp2Desc: "Gestione e-commerce (Prestashop), programmazione HTML/PHP/JS, fotoritocco, SEO, sviluppo software gestionale interno.",
+                cvExp2Detail1: "Ottimizzazione SEO on-page e off-page che ha portato a un aumento del traffico organico del 40%.",
+                cvExp2Detail2: "Sviluppo di moduli custom per Prestashop per migliorare l'esperienza utente.",
                 cvSkillPrestashop: "Prestashop",
                 cvExp3Title: "Consulente Commerciale",
                 cvExp3Date: "Maggio 2017 - Ottobre 2017",
                 cvExp3Company: "IBusiness Group S.R.L, Caltanissetta",
                 cvExp3Desc: "Consulenza professionale su aziende di Luce, Gas e Telefonia.",
+                cvExp3Detail1: "Acquisizione e gestione di un portafoglio clienti business.",
                 cvSkillConsulting: "Consulenza",
                 cvSkillCommercial: "Commerciale",
                 cvEdu1Title: "Diploma Ragioniere Informatico",
                 cvEdu1Date: "2011 - 2016",
                 cvEdu1School: "ITCG 'Mario Rapisardi', Caltanissetta",
                 cvEdu1Desc: "Materie principali: Economia Aziendale, Informatica, Diritto.",
+                cvEdu1Detail1: "Progetto scolastico: Sviluppo di un piccolo gestionale in Visual Basic per la biblioteca scolastica.",
                 cvSkillAccounting: "Economia",
                 cvSkillIT: "Informatica",
                 cvSkillLaw: "Diritto",
-                cvTechSkillsTitle: "Competenze Tecniche",
                 cvSoftSkillsTitle: "Soft Skills",
                 cvSoftSkill1: "Spirito di iniziativa e creatività",
                 cvSoftSkill2: "Cura dei dettagli",
@@ -600,7 +629,8 @@
                 contactButton: "Scrivimi una Email",
                 footerName: "Calogero",
                 footerRights: "Tutti i diritti riservati.",
-                footerMadeWith: "Realizzato con ❤️ e Tailwind CSS."
+                footerMadeWith: "Realizzato con ❤️ e Tailwind CSS.",
+                viewMoreDetails: "Ulteriori dettagli" // Traduzione aggiornata se necessario
             },
             en: {
                 pageTitle: "My Portfolio - Calogero",
@@ -627,7 +657,6 @@
                 skillHTML: "HTML5",
                 skillPHP: "PHP",
                 skillMySQL: "MySQL",
-                skillvisualbasic: "Visual Basic",
                 skillSEO: "SEO",
                 skillPhotoshop: "Photoshop",
                 projectsTitle: "Featured Projects",
@@ -645,6 +674,8 @@
                 cvExp1Date: "March 2022 - Present",
                 cvExp1Company: "Bruno spa, Catania",
                 cvExp1Desc: "Product knowledge, supplier relations, team planning, sales data analysis.",
+                cvExp1Detail1: "Advanced customer relationship management and loyalty building.",
+                cvExp1Detail2: "Training new colleagues on sales procedures and products.",
                 cvSkillSales: "Sales",
                 cvSkillTeam: "Team Management",
                 cvSkillDataAnalysis: "Data Analysis",
@@ -652,21 +683,24 @@
                 cvExp2Date: "February 2018 - March 2022",
                 cvExp2Company: "VivaiScifoStore, San Cataldo (CL)",
                 cvExp2Desc: "E-commerce management (Prestashop), HTML/PHP/JS programming, photo editing, SEO, internal management software development.",
+                cvExp2Detail1: "On-page and off-page SEO optimization leading to a 40% increase in organic traffic.",
+                cvExp2Detail2: "Development of custom Prestashop modules to enhance user experience.",
                 cvSkillPrestashop: "Prestashop",
                 cvExp3Title: "Commercial Consultant",
                 cvExp3Date: "May 2017 - October 2017",
                 cvExp3Company: "IBusiness Group S.R.L, Caltanissetta",
                 cvExp3Desc: "Professional consultancy for electricity, gas, and telephony companies.",
+                cvExp3Detail1: "Acquisition and management of a business client portfolio.",
                 cvSkillConsulting: "Consulting",
                 cvSkillCommercial: "Commercial",
                 cvEdu1Title: "Diploma in IT Accounting",
                 cvEdu1Date: "2011 - 2016",
                 cvEdu1School: "ITCG 'Mario Rapisardi', Caltanissetta",
                 cvEdu1Desc: "Main subjects: Business Administration, IT, Law.",
+                cvEdu1Detail1: "School project: Development of a small Visual Basic management software for the school library.",
                 cvSkillAccounting: "Accounting",
                 cvSkillIT: "IT",
                 cvSkillLaw: "Law",
-                cvTechSkillsTitle: "Technical Skills",
                 cvSoftSkillsTitle: "Soft Skills",
                 cvSoftSkill1: "Initiative and creativity",
                 cvSoftSkill2: "Attention to detail",
@@ -687,7 +721,8 @@
                 contactButton: "Send me an Email",
                 footerName: "Calogero",
                 footerRights: "All rights reserved.",
-                footerMadeWith: "Made with ❤️ and Tailwind CSS."
+                footerMadeWith: "Made with ❤️ and Tailwind CSS.",
+                viewMoreDetails: "More details" // Updated translation if needed
             }
         };
 
@@ -697,15 +732,16 @@
                 if (translations[lang] && translations[lang][key]) {
                     if (element.tagName === 'TITLE') {
                         element.textContent = translations[lang][key];
-                    } else if (element.placeholder && key.endsWith('Placeholder')) {
+                    } else if (element.placeholder && key.endsWith('Placeholder')) { // Example for placeholders
                          element.placeholder = translations[lang][key];
                     }
                     else {
-                        element.innerHTML = translations[lang][key];
+                        element.innerHTML = translations[lang][key]; // Use innerHTML to allow for HTML in translations if needed
                     }
                 }
             });
-            document.documentElement.lang = lang;
+            document.documentElement.lang = lang; // Set the lang attribute on the HTML element
+            // Update active class for language selectors
             document.getElementById('lang-it').classList.toggle('active', lang === 'it');
             document.getElementById('lang-en').classList.toggle('active', lang === 'en');
         }
@@ -715,6 +751,7 @@
             translatePage(lang);
         }
 
+        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -722,21 +759,24 @@
             mobileMenuButton.addEventListener('click', () => {
                 const isExpanded = mobileMenu.classList.toggle('hidden');
                 mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
-                mobileMenu.setAttribute('aria-hidden', String(isExpanded));
+                mobileMenu.setAttribute('aria-hidden', String(isExpanded)); // For accessibility
             });
         }
 
+        // Set current year in footer
         const currentYearSpan = document.getElementById('currentYear');
         if (currentYearSpan) {
             currentYearSpan.textContent = new Date().getFullYear();
         }
 
+        // Smooth scrolling for anchor links & close mobile menu on nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    // Close mobile menu if open and a nav link is clicked
                     if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                          if(mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
@@ -749,46 +789,50 @@
             });
         });
 
+        // Expandable Timeline Logic
         function setupExpandableTimeline() {
             const timelineItems = document.querySelectorAll('.timeline-content');
 
             timelineItems.forEach(item => {
-                const header = item.querySelector('.timeline-header');
+                const newExpandTrigger = item.querySelector('.timeline-expand-trigger');
                 const detailsToExpand = item.querySelector('.expandable-details');
-                const arrow = header.querySelector('.timeline-arrow');
+                const newArrow = item.querySelector('.new-timeline-arrow');
 
-                if (!header || !detailsToExpand || !arrow) {
+                if (!newExpandTrigger || !detailsToExpand || !newArrow) {
+                    // console.warn("Elementi mancanti per la timeline espandibile:", item);
                     return;
                 }
 
-                header.addEventListener('click', () => {
-                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                const toggleExpansion = () => {
+                    const isExpanded = newExpandTrigger.getAttribute('aria-expanded') === 'true';
+                    const newAriaExpandedState = !isExpanded;
 
-                    if (isExpanded) {
-                        detailsToExpand.style.maxHeight = null;
-                        detailsToExpand.classList.remove('expanded');
-                        arrow.classList.remove('expanded');
-                        header.setAttribute('aria-expanded', 'false');
-                    } else {
+                    if (newAriaExpandedState) { // Espandi
                         detailsToExpand.classList.add('expanded');
                         detailsToExpand.style.maxHeight = detailsToExpand.scrollHeight + "px";
-                        arrow.classList.add('expanded');
-                        header.setAttribute('aria-expanded', 'true');
+                        newArrow.classList.add('expanded');
+                    } else { // Collassa
+                        detailsToExpand.style.maxHeight = null;
+                        detailsToExpand.classList.remove('expanded');
+                        newArrow.classList.remove('expanded');
                     }
-                });
+                    newExpandTrigger.setAttribute('aria-expanded', newAriaExpandedState.toString());
+                };
 
-                header.addEventListener('keydown', (event) => {
+                newExpandTrigger.addEventListener('click', toggleExpansion);
+                newExpandTrigger.addEventListener('keydown', (event) => {
                     if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        header.click();
+                        toggleExpansion();
                     }
                 });
             });
         }
 
 
+        // Initialize translations and other scripts on DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
-            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'it';
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'it'; // Default to Italian
             setLanguage(preferredLanguage);
             setupExpandableTimeline();
         });
