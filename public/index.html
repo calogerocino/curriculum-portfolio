@@ -12,9 +12,52 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* Animazione per lo sfondo della sezione Home - PROGRESSIVA */
         .hero-bg {
-            background-color: #f0f4f8;
+            /* Definiamo un gradiente che include tutti i colori desiderati in sequenza.
+               Ripetiamo il primo colore alla fine per un ciclo fluido.
+               Angolo del gradiente: 45 gradi.
+               Colori: Blu, Rosso, Giallo, Verde, e di nuovo Blu. */
+            background-image: linear-gradient(45deg,
+                #4285F4, /* Blu Gemini */
+                #EA4335, /* Rosso Gemini */
+                #FBBC05, /* Giallo Gemini */
+                #34A853, /* Verde Gemini */
+                #4285F4  /* Blu Gemini (ripetuto per il ciclo) */
+            );
+            background-size: 400% 400%; /* Il gradiente è 4 volte più grande dell'elemento,
+                                           permettendo un ampio scorrimento. */
+            animation: gemini-progressive-animation 20s linear infinite; /* Applica l'animazione */
+            position: relative; /* Utile per il posizionamento di elementi figli */
         }
+
+        @keyframes gemini-progressive-animation {
+            0% {
+                background-position: 0% 50%; /* Il gradiente inizia dalla sua posizione iniziale (sinistra) */
+            }
+            100% {
+                background-position: 100% 50%; /* Il gradiente scorre completamente verso destra,
+                                                  mostrando tutte le sue parti. Poiché il gradiente
+                                                  è ciclico (inizia e finisce con il blu),
+                                                  la transizione al successivo ciclo 0% sarà fluida. */
+            }
+        }
+
+        /* Stili per assicurare la leggibilità del testo sulla sezione Home animata */
+        #home .container > * { /* Applica a tutti i figli diretti del container per semplicità */
+            position: relative; /* Per assicurare che siano sopra lo sfondo */
+            z-index: 1;
+        }
+        #home .container h1 {
+            color: #ffffff; /* Testo bianco per il titolo */
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); /* Leggera ombra per migliorare il contrasto */
+        }
+        #home .container p {
+            color: #f0f0f0; /* Testo grigio chiaro per il sottotitolo */
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); /* Leggera ombra */
+        }
+        /* Il bottone ha già classi Tailwind per il colore, che dovrebbero funzionare bene */
+
 
         .project-card:hover {
             transform: translateY(-5px);
@@ -59,26 +102,28 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 28px; /* Larghezza fissa */
+            height: 28px; /* Altezza fissa */
         }
 
         .language-selector a svg {
-            width: 20px;
-            height: auto;
-            display: block;
+            width: 20px; /* Larghezza SVG */
+            height: auto; /* Altezza automatica per mantenere le proporzioni */
+            display: block; /* Rimuove spazio extra sotto l'SVG */
         }
 
+
         .language-selector a.active {
-            background-color: #e0e7ff;
-            border-radius: 50%;
+            background-color: #e0e7ff; /* Sfondo per lingua attiva */
+            border-radius: 50%; /* Cerchio per lingua attiva */
         }
 
         .language-selector span.separator {
-            color: #9ca3af;
-            margin: 0 0.15rem;
-            align-self: center;
+            color: #9ca3af; /* Colore del separatore */
+            margin: 0 0.15rem; /* Margine ridotto per il separatore */
+            align-self: center; /* Allinea verticalmente il separatore */
         }
+
 
         /* Stili per la Timeline del Curriculum */
         .timeline {
@@ -229,7 +274,6 @@
         .timeline-expand-trigger span {
             /* Stili per il testo "ulteriori dettagli" */
             @apply text-sky-500 hover:text-sky-600 underline text-sm font-medium;
-            /* vertical-align: middle; rimosso perché items-center sul genitore è più appropriato */
         }
 
         .new-timeline-arrow {
@@ -373,10 +417,8 @@
 
     <section id="home" class="hero-bg py-20 md:py-32">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4" data-key="heroTitle">Ciao, sono Calogero!</h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8" data-key="heroSubtitle">Sviluppatore Web con passione per
-                la creazione di soluzioni digitali innovative.</p>
-            <a href="#progetti"
+            <h1 class="text-4xl md:text-6xl font-bold mb-4" data-key="heroTitle">Ciao, sono Calogero!</h1> <p class="text-xl md:text-2xl mb-8" data-key="heroSubtitle">Sviluppatore Web con passione per
+                la creazione di soluzioni digitali innovative.</p> <a href="#progetti"
                 class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300"
                 data-key="heroCTA">Scopri i miei Lavori</a>
         </div>
@@ -481,9 +523,9 @@
                                 <span data-key="cvSkillDataAnalysis">Analisi Dati</span>
                             </div>
                         </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-expand-trigger flex" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor"
+                            <svg class="new-timeline-arrow w-4 h-4 mt-1" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
@@ -519,9 +561,9 @@
                                 <span data-key="cvSkillPrestashop">Prestashop</span>
                             </div>
                         </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-expand-trigger flex" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor"
+                            <svg class="new-timeline-arrow w-4 h-4 mt-1" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
@@ -553,9 +595,9 @@
                                 <span data-key="cvSkillCommercial">Commerciale</span>
                             </div>
                         </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-expand-trigger flex" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor"
+                            <svg class="new-timeline-arrow w-4 h-4 mt-1" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
@@ -586,9 +628,9 @@
                                 <span data-key="cvSkillLaw">Diritto</span>
                             </div>
                         </div>
-                        <div class="timeline-expand-trigger" role="button" tabindex="0" aria-expanded="false">
+                        <div class="timeline-expand-trigger flex" role="button" tabindex="0" aria-expanded="false">
                             <span data-key="viewMoreDetails">Ulteriori dettagli</span>
-                            <svg class="new-timeline-arrow w-4 h-4" fill="none" stroke="currentColor"
+                            <svg class="new-timeline-arrow w-4 h-4 mt-1" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
@@ -842,7 +884,7 @@
                 footerName: "Calogero",
                 footerRights: "Tutti i diritti riservati.",
                 footerMadeWith: "Realizzato con ❤️ e Tailwind CSS.",
-                viewMoreDetails: "Ulteriori dettagli" // Traduzione aggiornata se necessario
+                viewMoreDetails: "Ulteriori dettagli"
             },
             en: {
                 pageTitle: "My Curriò - Calogero",
@@ -936,7 +978,7 @@
                 footerName: "Calogero",
                 footerRights: "All rights reserved.",
                 footerMadeWith: "Made with ❤️ and Tailwind CSS.",
-                viewMoreDetails: "More details" // Updated translation if needed
+                viewMoreDetails: "More details"
             }
         };
 
@@ -1013,7 +1055,6 @@
                 const newArrow = item.querySelector('.new-timeline-arrow');
 
                 if (!newExpandTrigger || !detailsToExpand || !newArrow) {
-                    // console.warn("Elementi mancanti per la timeline espandibile:", item);
                     return;
                 }
 
